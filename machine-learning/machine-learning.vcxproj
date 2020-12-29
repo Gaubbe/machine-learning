@@ -146,6 +146,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\ml\Perceptron.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\ml\ActivationFunction.h" />
+    <ClInclude Include="src\ml\Perceptron.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
