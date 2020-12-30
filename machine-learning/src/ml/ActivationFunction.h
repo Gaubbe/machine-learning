@@ -1,10 +1,12 @@
 #pragma once
 #include <math.h>
 
+
 struct ActivationFuction {
 	virtual double Function(double input) = 0;
 	virtual double DerivedFunction(double input) = 0;
 };
+typedef double (ActivationFuction::* ActivationFn)(double input);
 
 struct SigmoidActiavtionFuction : public ActivationFuction {
 	double Function(double input) override { return 1 / (1 + exp(-input)); }

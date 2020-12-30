@@ -20,7 +20,7 @@ void Perceptron::TrainOneExample(Eigen::VectorXd inputs, double target)
 {
 	this->FeedForward(inputs);
 	m_Error = target - m_Output;
-	Eigen::MatrixXd deltas = this->CalculateDeltas() * m_LearningRate;
+	Eigen::MatrixXd deltas = this->CalculateDeltas();
 	//std::cout << m_Weights << std::endl;
 	//std::cout << deltas << std::endl;
 	m_Weights += deltas;
@@ -34,6 +34,6 @@ void Perceptron::AddBiasInput(Eigen::VectorXd* inputs)
 }
 Eigen::MatrixXd Perceptron::CalculateDeltas()
 {
-	return (m_InputsWithBias * (2 * m_Error * this->m_ActivationFunction->DerivedFunction(m_Output) * m_LearningRate)).transpose();
+	return (m_InputsWithBias * (m_Error * this->m_ActivationFunction->DerivedFunction(m_Output) * m_LearningRate)).transpose();
 }
 }

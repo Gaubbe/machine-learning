@@ -146,10 +146,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\ml\FeedForwardLayer.cpp" />
+    <ClCompile Include="src\ml\Layer.cpp" />
     <ClCompile Include="src\ml\Perceptron.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ml\ActivationFunction.h" />
+    <ClInclude Include="src\ml\FeedForwardLayer.h" />
+    <ClInclude Include="src\ml\Layer.h" />
     <ClInclude Include="src\ml\Perceptron.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

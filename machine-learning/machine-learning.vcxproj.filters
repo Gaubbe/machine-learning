@@ -24,12 +24,24 @@
     <ClCompile Include="src\ml\Perceptron.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\ml\Layer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ml\FeedForwardLayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ml\Perceptron.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\ml\ActivationFunction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ml\FeedForwardLayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ml\Layer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
