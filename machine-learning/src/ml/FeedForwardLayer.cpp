@@ -1,7 +1,7 @@
 #include "FeedForwardLayer.h"
 
 namespace ml {
-FeedForwardLayer::FeedForwardLayer(int numInputs, int numOutputs, ActivationFuction* activationFunction, double learningRate)
+FeedForwardLayer::FeedForwardLayer(int numInputs, int numOutputs, ActiavtionFunction* activationFunction, double learningRate)
 	:Layer(numInputs, numOutputs, activationFunction, learningRate)
 {
 	this->m_Weights = Eigen::MatrixXd::Random(numOutputs, numInputs + 1);
@@ -19,22 +19,16 @@ void FeedForwardLayer::Forward(Eigen::VectorXd inputs)
 
 void FeedForwardLayer::Back(Eigen::VectorXd errors)
 {
-	this->m_Errors = errors;
 	Eigen::VectorXd derivedOutputs = m_Outputs.unaryExpr([this](double input) { return this->m_ActivationFunction->DerivedFunction(input); });
-	this->m_WeightDeltas = (this->m_Errors.cwiseProduct(derivedOutputs) * this->m_LearningRate) * this->m_Inputs.transpose();
+	this->m_WeightDeltas = (errors.cwiseProduct(derivedOutputs) * this->m_LearningRate) * this->m_Inputs.transpose();
 
 	Eigen::MatrixXd weightsWitoutBiasTransposed = m_Weights.leftCols(this->m_NumInputs).transpose();
-	this->m_PreviousErrors = weightsWitoutBiasTransposed * m_Errors;
+	this->m_PreviousLayerErrors = weightsWitoutBiasTransposed * errors;
 }
 
-void FeedForwardLayer::ApplyWeightDeltas()
+void FeedForwardLayer::ApplyBack()
 {
 	this->m_Weights += this->m_WeightDeltas;
-}
-
-void FeedForwardLayer::ComputeOuputLayerErrors(Eigen::VectorXd targets)
-{
-	this->m_Errors = targets - this->m_Activations;
 }
 
 void FeedForwardLayer::AddBiasToInput(Eigen::VectorXd* inputs)

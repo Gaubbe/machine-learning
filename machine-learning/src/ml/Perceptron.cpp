@@ -2,7 +2,7 @@
 #include <iostream>
 
 namespace ml {
-Perceptron::Perceptron(int numInputs, float learningRate, ActivationFuction* activationFunction)
+Perceptron::Perceptron(int numInputs, float learningRate, ActiavtionFunction* activationFunction)
 	: m_NumInputs(numInputs), m_LearningRate(learningRate), m_ActivationFunction(activationFunction)
 {
 	this->m_Weights = Eigen::MatrixXd::Random(1, this->m_NumInputs + 1);

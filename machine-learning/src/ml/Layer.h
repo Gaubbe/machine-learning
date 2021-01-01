@@ -9,19 +9,22 @@ protected:
 	int m_NumOutputs;
 	Eigen::VectorXd m_Inputs;
 	Eigen::VectorXd m_Activations;
-	ActivationFuction* m_ActivationFunction;
+	Eigen::VectorXd m_PreviousLayerErrors;
+	ActiavtionFunction* m_ActivationFunction;
 	double m_LearningRate;
 
 public:
-	Layer(int numInputs, int numOutputs, ActivationFuction* activationFunction = new SigmoidActiavtionFuction, double learningRate = 0.1);
+	Layer(int numInputs, int numOutputs, ActiavtionFunction* activationFunction = new SigmoidActiavtionFunction, double learningRate = 0.1);
 
 	inline unsigned int GetNumInputs() { return m_NumInputs; }
 	inline unsigned int GetNumOutputs() { return m_NumOutputs; }
 	inline Eigen::VectorXd GetInputs() { return m_Inputs; }
+	inline Eigen::VectorXd GetPreviousLayerErrors() { return m_PreviousLayerErrors; }
 	inline Eigen::VectorXd GetActivations() { return m_Activations; }
-	inline ActivationFuction* GetActivationFunction() { return m_ActivationFunction; }
+	inline ActiavtionFunction* GetActivationFunction() { return m_ActivationFunction; }
 
 	virtual void Forward(Eigen::VectorXd inputs) = 0;
 	virtual void Back(Eigen::VectorXd errors) = 0;
+	virtual void ApplyBack() = 0;
 };
 }

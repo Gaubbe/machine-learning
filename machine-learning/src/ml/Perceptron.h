@@ -14,9 +14,9 @@ private:
 
 	double m_Error;
 
-	ActivationFuction* m_ActivationFunction;
+	ActiavtionFunction* m_ActivationFunction;
 public:
-	Perceptron(int numInputs, float learningRate = 0.1, ActivationFuction* activationFunction = new SigmoidActiavtionFuction);
+	Perceptron(int numInputs, float learningRate = 0.1, ActiavtionFunction* activationFunction = new SigmoidActiavtionFunction);
 
 	inline double GetOutput() { return m_Output; }
 	inline double GetActivation() { return m_Activation; }
