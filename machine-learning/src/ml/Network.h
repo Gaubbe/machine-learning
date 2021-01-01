@@ -18,5 +18,6 @@ public:
 
 	void Forward(Eigen::VectorXd inputs);
 	void Back(Eigen::VectorXd targets);
+	void ApplyBatch();
 };
 }

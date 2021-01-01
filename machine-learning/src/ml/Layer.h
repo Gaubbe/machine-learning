@@ -11,6 +11,7 @@ protected:
 	Eigen::VectorXd m_Activations;
 	Eigen::VectorXd m_PreviousLayerErrors;
 	ActiavtionFunction* m_ActivationFunction;
+	int m_IterationsSinceLastBatch;
 	double m_LearningRate;
 
 public:
@@ -25,6 +26,6 @@ public:
 
 	virtual void Forward(Eigen::VectorXd inputs) = 0;
 	virtual void Back(Eigen::VectorXd errors) = 0;
-	virtual void ApplyBack() = 0;
+	virtual void ApplyBatch() = 0;
 };
 }

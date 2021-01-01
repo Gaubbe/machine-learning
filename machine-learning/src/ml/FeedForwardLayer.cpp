@@ -5,6 +5,7 @@ FeedForwardLayer::FeedForwardLayer(int numInputs, int numOutputs, ActiavtionFunc
 	:Layer(numInputs, numOutputs, activationFunction, learningRate)
 {
 	this->m_Weights = Eigen::MatrixXd::Random(numOutputs, numInputs + 1);
+	this->m_WeightDeltas = Eigen::MatrixXd::Zero(numOutputs, numInputs + 1);
 }
 
 void FeedForwardLayer::Forward(Eigen::VectorXd inputs)
@@ -20,15 +21,18 @@ void FeedForwardLayer::Forward(Eigen::VectorXd inputs)
 void FeedForwardLayer::Back(Eigen::VectorXd errors)
 {
 	Eigen::VectorXd derivedOutputs = m_Outputs.unaryExpr([this](double input) { return this->m_ActivationFunction->DerivedFunction(input); });
-	this->m_WeightDeltas = (errors.cwiseProduct(derivedOutputs) * this->m_LearningRate) * this->m_Inputs.transpose();
+	this->m_WeightDeltas += (errors.cwiseProduct(derivedOutputs) * this->m_LearningRate) * this->m_Inputs.transpose();
+	this->m_IterationsSinceLastBatch++;
 
 	Eigen::MatrixXd weightsWitoutBiasTransposed = m_Weights.leftCols(this->m_NumInputs).transpose();
 	this->m_PreviousLayerErrors = weightsWitoutBiasTransposed * errors;
 }
 
-void FeedForwardLayer::ApplyBack()
+void FeedForwardLayer::ApplyBatch()
 {
-	this->m_Weights += this->m_WeightDeltas;
+	this->m_Weights += this->m_WeightDeltas / this->m_IterationsSinceLastBatch;
+	this->m_IterationsSinceLastBatch = 0;
+	this->m_WeightDeltas = Eigen::MatrixXd::Zero(this->m_NumOutputs, this->m_NumInputs+ 1);
 }
 
 void FeedForwardLayer::AddBiasToInput(Eigen::VectorXd* inputs)

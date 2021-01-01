@@ -18,7 +18,7 @@ public:
 	void Forward(Eigen::VectorXd inputs) override;
 	void Back(Eigen::VectorXd errors) override;
 
-	void ApplyBack();
+	void ApplyBatch() override;
 
 private:
 	static void AddBiasToInput(Eigen::VectorXd* inputs);

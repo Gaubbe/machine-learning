@@ -26,7 +26,11 @@ void Network::Back(Eigen::VectorXd targets)
 	for (int i = m_NumLayers - 1; i >= 0; i--) {
 		this->m_Layers[i]->Back(errors);
 		errors = this->m_Layers[i]->GetPreviousLayerErrors();
-		this->m_Layers[i]->ApplyBack();
 	}
+}
+void Network::ApplyBatch()
+{
+	for (int i = 0; i < m_NumLayers; i++)
+		this->m_Layers[i]->ApplyBatch();
 }
 }
