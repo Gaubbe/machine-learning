@@ -1,8 +1,9 @@
 #pragma once
 #include <vector>
 #include <fstream>
+#include <cstdint>
 
-static std::vector<char> ReadFileIntoVector(const char* filePath, bool binary)
+static std::vector<uint8_t> ReadFileIntoVector(const char* filePath, bool binary)
 {
 	std::ifstream file;
 	if (binary) {
@@ -14,6 +15,6 @@ static std::vector<char> ReadFileIntoVector(const char* filePath, bool binary)
 	file.seekg(0, std::ios::beg);
 	char* array = new char[size];
 	file.read(array, size);
-	std::vector<char> result(array, array+size);
+	std::vector<uint8_t> result(array, array+size);
 	return result;
 }
