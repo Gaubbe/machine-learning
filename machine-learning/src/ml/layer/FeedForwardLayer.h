@@ -1,6 +1,7 @@
 #pragma once
 #include "Layer.h"
 
+
 namespace ml {
 class FeedForwardLayer : public Layer {
 protected:
@@ -9,7 +10,7 @@ protected:
 	Eigen::VectorXd m_Outputs;
 
 public:
-	FeedForwardLayer(int numInputs, int numOutputs, ActiavtionFunction* activationfunction = new SigmoidActiavtionFunction, double learningRate = 0.1);
+	FeedForwardLayer(int numInputs, int numOutputs, std::shared_ptr<ActivationFunction> activationFunction, double learningRate);
 
 	inline Eigen::MatrixXd GetWeights() { return m_Weights; }
 	inline Eigen::MatrixXd GetWeightDeltas() { return m_WeightDeltas; }
@@ -19,7 +20,6 @@ public:
 	void Back(Eigen::VectorXd errors) override;
 
 	void ApplyBatch() override;
-
 private:
 	static void AddBiasToInput(Eigen::VectorXd* inputs);
 };

@@ -1,7 +1,8 @@
 #include "FeedForwardLayer.h"
+#include "FeedForwardLayerBuilder.h"
 
 namespace ml {
-FeedForwardLayer::FeedForwardLayer(int numInputs, int numOutputs, ActiavtionFunction* activationFunction, double learningRate)
+FeedForwardLayer::FeedForwardLayer(int numInputs, int numOutputs, std::shared_ptr<ActivationFunction> activationFunction, double learningRate)
 	:Layer(numInputs, numOutputs, activationFunction, learningRate)
 {
 	this->m_Weights = Eigen::MatrixXd::Random(numOutputs, numInputs + 1);

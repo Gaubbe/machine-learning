@@ -1,6 +1,6 @@
 #pragma once
 #include <Eigen/Dense>
-#include "ActivationFunction.h"
+#include "../ActivationFunction.h"
 
 namespace ml {
 class Perceptron {
@@ -14,9 +14,9 @@ private:
 
 	double m_Error;
 
-	ActiavtionFunction* m_ActivationFunction;
+	ActivationFunction* m_ActivationFunction;
 public:
-	Perceptron(int numInputs, float learningRate = 0.1, ActiavtionFunction* activationFunction = new SigmoidActiavtionFunction);
+	Perceptron(int numInputs, float learningRate = 0.1, ActivationFunction* activationFunction = new SigmoidActivationFunction);
 
 	inline double GetOutput() { return m_Output; }
 	inline double GetActivation() { return m_Activation; }
